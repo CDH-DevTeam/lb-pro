@@ -22,7 +22,8 @@
 					"filter" : [
 						"standard",
 						"lowercase",
-						"swedish_stop"
+						"swedish_stop",
+						"swedish_stemmer"
 					],
 					"char_filter" : [
 						"html_strip"

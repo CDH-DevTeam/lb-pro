@@ -1,6 +1,8 @@
 import os
 import re
 
+from shutil import copyfile
+
 FAKSIMIL_PATH = '../faksimil/'
 FAKSIMIL_EXT = '-faksimil-workdb'
 FAKSIMIL_OUTPUT = '../faksimil_v2/'
@@ -18,6 +20,11 @@ if __name__ == '__main__':
 
 	# Edit faksimil
 	for f in faksimil_files:
+
+		# Copy other files
+		input_path = FAKSIMIL_PATH + f + '-workdb' + '.xml'
+		output_path = FAKSIMIL_OUTPUT + f + '-workdb' + '.xml'
+		copyfile(input_path, output_path)
 
 
 		file_path = FAKSIMIL_PATH + f + '.xml'
