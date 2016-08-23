@@ -49,18 +49,22 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 		meta_soup = BeautifulSoup(open(meta_path + file_name + meta_ext + '.xml'), 'lxml-xml')
 		meta_data = {}
 
-		
 		# Strings
 		def parseString(key, fallback):
 			try:
-				meta_data[key] = meta_soup.find(key).string
+				if (meta_soup.find(key).parent.name.lower() == 'lbwork'):
+					meta_data[key] = meta_soup.find(key).string
+				else:
+					meta_data[key] = None
 			except:
 				meta_data[key] = fallback
 
 		parseString('lbworkid', None)
+		parseString('librisid', None)
 		parseString('mediatype', None)
 		parseString('titleid', None)
 		parseString('title', None)
+		parseString('subtitle', None)
 		parseString('shorttitle', None)
 		parseString('sortkey', None)
 		parseString('texttype', None)
@@ -73,6 +77,7 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 		parseString('fraktur', None)
 		parseString('printed', None)
 		parseString('modernized', None)
+		parseString('license', None)
 		
 		# Dates
 		def parseDate(key, fallback):
@@ -250,7 +255,7 @@ if __name__ == '__main__':
 	counter = 1
 	for f in etext_files:
 	#if True:
-	#	f = 'lb8548815'
+	#	f = 'lb305511'
 		
 		parseFile(
 			file_name=f,
@@ -281,7 +286,7 @@ if __name__ == '__main__':
 		
 		print(str(counter) + '/' + str(len(faksimil_files)))
 		counter += 1
-
+	
 	print('\nPARSING FINISHED!\n')
 
 
