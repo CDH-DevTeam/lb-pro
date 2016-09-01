@@ -6,6 +6,12 @@
 		},
 		"analysis": {
 			"filter": {
+				"custom_shingle_filter": {
+					"type": "shingle",
+					"min_shingle_size": 2,
+					"max_shingle_size": 2,
+					"output_unigrams": false
+				},
 				"swedish_stemmer": {
 					"type": "stemmer",
 					"language": "swedish"
@@ -16,14 +22,25 @@
 				}
 			},
 			"analyzer": {
+				"custom_shingle_analyzer": {
+					"type": "custom",
+					"tokenizer": "standard",
+					"filter": [
+						"standard",
+						"lowercase",
+						"custom_shingle_filter"
+					],
+					"char_filter" : [
+						"html_strip"
+					]
+				},
 				"custom_html_analyzer": {
 					"type": "custom",
 					"tokenizer" : "standard",
 					"filter" : [
 						"standard",
 						"lowercase",
-						"swedish_stop",
-						"swedish_stemmer"
+						"swedish_stop"
 					],
 					"char_filter" : [
 						"html_strip"
@@ -52,29 +69,199 @@
 							"type": "object",
 							"properties": {
 								"authors": {
-									"type": "string",
-									"index": "not_analyzed",
-									"doc_values": true
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"name": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true,
+											"fields": {
+												"analyzed": {
+													"type": "string",
+													"analyzer": "standard",
+													"fielddata": {
+														"loading" : "eager_global_ordinals" 
+													}
+												}
+											}
+										},
+										"birth": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"death": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"gender": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										}
+									}
 								},
 								"editors": {
-									"type": "string",
-									"index": "not_analyzed",
-									"doc_values": true
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"name": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true,
+											"fields": {
+												"tokenized": {
+													"type": "string",
+													"analyzer": "standard",
+													"fielddata": {
+														"loading" : "eager_global_ordinals" 
+													}
+												}
+											}
+										},
+										"birth": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"death": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"gender": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										}
+									}
 								},
 								"translators": {
-									"type": "string",
-									"index": "not_analyzed",
-									"doc_values": true
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"name": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true,
+											"fields": {
+												"tokenized": {
+													"type": "string",
+													"analyzer": "standard",
+													"fielddata": {
+														"loading" : "eager_global_ordinals" 
+													}
+												}
+											}
+										},
+										"birth": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"death": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"gender": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										}
+									}
 								},
 								"illustrators": {
-									"type": "string",
-									"index": "not_analyzed",
-									"doc_values": true
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"name": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true,
+											"fields": {
+												"tokenized": {
+													"type": "string",
+													"analyzer": "standard",
+													"fielddata": {
+														"loading" : "eager_global_ordinals" 
+													}
+												}
+											}
+										},
+										"birth": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"death": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"gender": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										}
+									}
 								},
 								"scholars": {
-									"type": "string",
-									"index": "not_analyzed",
-									"doc_values": true
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"name": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true,
+											"fields": {
+												"tokenized": {
+													"type": "string",
+													"analyzer": "standard",
+													"fielddata": {
+														"loading" : "eager_global_ordinals" 
+													}
+												}
+											}
+										},
+										"birth": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"death": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										},
+										"gender": {
+											"type": "string",
+											"index": "not_analyzed",
+											"doc_values": true
+										}
+									}
 								}
 							}
 						},
@@ -84,6 +271,9 @@
 							"doc_values": true
 						},
 						"fraktur": {
+							"type": "boolean"
+						},
+						"estimated_printyear": {
 							"type": "boolean"
 						},
 						"imported": {
@@ -225,13 +415,33 @@
 						}
 					}
 				},
-				"page_content": {
+				"page_content_original": {
 					"type": "string",
 					"index_options": "offsets",
 					"fielddata": {
 						"loading" : "eager_global_ordinals" 
 					},
-					"analyzer": "custom_html_analyzer"
+					"analyzer": "custom_html_analyzer",
+					"fields": {
+						"length": {
+							"type": "token_count",
+							"analyzer": "custom_html_analyzer"
+						}
+					}
+				},
+				"page_content_modernized": {
+					"type": "string",
+					"index_options": "offsets",
+					"fielddata": {
+						"loading" : "eager_global_ordinals" 
+					},
+					"analyzer": "custom_html_analyzer",
+					"fields": {
+						"length": {
+							"type": "token_count",
+							"analyzer": "custom_html_analyzer"
+						}
+					}
 				},
 				"page_idx": {
 					"type": "string",
