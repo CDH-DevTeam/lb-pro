@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import csv
 
-sys.path.insert(0, '../translator/')
+sys.path.insert(0, 'data/translator/')
 
 from timeit import default_timer as timer
 from bs4 import BeautifulSoup
@@ -17,19 +17,19 @@ from dateutil.relativedelta import relativedelta
 from modernize_module import modernize
 
 # Constants
-FAKSIMIL_META_PATH = '../faksimil/'
-FAKSIMIL_CONTENT_PATH = '../faksimil_v2/'
+FAKSIMIL_META_PATH = 'data/faksimil_v2/'
+FAKSIMIL_CONTENT_PATH = 'data/faksimil_v2/'
 FAKSIMIL_META_EXT = '-faksimil-workdb'
 FAKSIMIL_CONTENT_EXT = '-faksimil'
-FAKSIMIL_OUTPUT_PATH = '../json_data_new/'
+FAKSIMIL_OUTPUT_PATH = 'data/json_data_new/'
 
-ETEXT_META_PATH = '../etext/'
-ETEXT_CONTENT_PATH = '../etext/'
+ETEXT_META_PATH = 'data/etext/'
+ETEXT_CONTENT_PATH = 'data/etext/'
 ETEXT_META_EXT = '-etext-workdb'
 ETEXT_CONTENT_EXT = ''
-ETEXT_OUTPUT_PATH = '../json_data_new/'
+ETEXT_OUTPUT_PATH = 'data/json_data_new/'
 
-AUTHOR_METADATA_PATH = '../authors.csv'
+AUTHOR_METADATA_PATH = 'data/authors.csv'
 
 # Functions
 def isMetaData(f, meta_ext):

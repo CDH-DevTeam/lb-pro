@@ -28,6 +28,7 @@
 					"filter": [
 						"standard",
 						"lowercase",
+						"swedish_stop",
 						"custom_shingle_filter"
 					],
 					"char_filter" : [
@@ -271,10 +272,14 @@
 							"doc_values": true
 						},
 						"fraktur": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"estimated_printyear": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"imported": {
 							"type": "date",
@@ -305,7 +310,9 @@
 							"doc_values": true
 						},
 						"modernized": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"part_info": {
 							"type": "object",
@@ -321,7 +328,9 @@
 									"doc_values": true
 								},
 								"navshow": {
-									"type": "boolean"
+									"type": "string",
+									"index": "not_analyzed",
+									"doc_values": true
 								},
 								"startpagename": {
 									"type": "string",
@@ -346,10 +355,14 @@
 							}
 						},
 						"printed": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"proofread": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"provenance": {
 							"type": "nested"
@@ -375,7 +388,9 @@
 							}
 						},
 						"searchable": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"shorttitle": {
 							"type": "string",
@@ -383,7 +398,9 @@
 							"doc_values": true
 						},
 						"show": {
-							"type": "boolean"
+							"type": "string",
+							"index": "not_analyzed",
+							"doc_values": true
 						},
 						"sortkey": {
 							"type": "string",
@@ -426,10 +443,14 @@
 						"length": {
 							"type": "token_count",
 							"analyzer": "custom_html_analyzer"
+						},
+						"shingles": {
+							"type": "string",
+							"analyzer": "custom_shingle_analyzer"
 						}
 					}
 				},
-				"page_content_modernized": {
+				"page_content_translated": {
 					"type": "string",
 					"index_options": "offsets",
 					"fielddata": {
@@ -440,6 +461,10 @@
 						"length": {
 							"type": "token_count",
 							"analyzer": "custom_html_analyzer"
+						},
+						"shingles": {
+							"type": "string",
+							"analyzer": "custom_shingle_analyzer"
 						}
 					}
 				},

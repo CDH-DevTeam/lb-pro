@@ -3,9 +3,9 @@ import re
 
 from shutil import copyfile
 
-FAKSIMIL_PATH = '../faksimil/'
+FAKSIMIL_PATH = 'data/faksimil/'
 FAKSIMIL_EXT = '-faksimil-workdb'
-FAKSIMIL_OUTPUT = '../faksimil_v2/'
+FAKSIMIL_OUTPUT = 'data/faksimil_v2/'
 
 def isMetaData(f):
 	if FAKSIMIL_EXT in f:

@@ -14,7 +14,7 @@ import requests
 ###
 
 PATH_ES_CONFIG = 'es_config.json'
-PATH_DATA_FOLDER = '../json_data_new/'
+PATH_DATA_FOLDER = 'data/json_data_new/'
 
 HOST_URL = 'http://localhost'
 HOST_PORT = '9200'
