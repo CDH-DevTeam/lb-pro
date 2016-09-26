@@ -128,6 +128,12 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 	meta_data['authorid']['translators'] = []
 	meta_data['authorid']['illustrators'] = []
 	meta_data['authorid']['scholars'] = []
+	auth_meta_translator = {
+		'male': 'man',
+		'female': 'kvinna',
+		'not known': 'okänt',
+		'not applicable': 'ej tillämplig'
+	}
 	for node in meta_soup.findAll('authorid'):
 		if (node.parent.name.lower() == 'lbwork'):
 			if (node.string in author_metadata):
@@ -136,7 +142,7 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 					'name': author_metadata[node.string]['name'],
 					'birth': author_metadata[node.string]['birth'],
 					'death': author_metadata[node.string]['death'],
-					'gender': author_metadata[node.string]['gender'],
+					'gender': auth_meta_translator[author_metadata[node.string]['gender']],
 				}
 			else:
 				author_obj = {
