@@ -109,14 +109,14 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 	parseString('subtitle', None)
 	parseString('shorttitle', None)
 	parseString('sortkey', None)
-	parseString('texttype', None)
+	parseString('texttype', 'saknas')
 	parseString('keyword', None)
 	parseBool('show', None)
 	parseString('edition', None)
 	parseString('language', None)
 	parseBool('searchable', None)
 	parseBool('proofread', None)
-	parseBool('fraktur', None)
+	parseBool('fraktur', 'saknas')
 	parseBool('printed', None)
 	parseBool('modernized', None)
 	parseString('license', None)
@@ -147,10 +147,10 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 			else:
 				author_obj = {
 					'id': node.string,
-					'name': None,
+					'name': 'saknas',
 					'birth': None,
 					'death': None,
-					'gender': None,
+					'gender': 'saknas'
 				}
 			
 			if node.get('type') == None:
@@ -163,6 +163,15 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 				meta_data['authorid']['illustrators'].append(author_obj)
 			elif node.get('type') == 'scholar':
 				meta_data['authorid']['scholars'].append(author_obj)
+
+	if len(meta_data['authorid']['authors']) < 1:
+		meta_data['authorid']['authors'].append({
+			'id': 'saknas',
+			'name': 'saknas',
+			'birth': None,
+			'death': None,
+			'gender': 'saknas'
+		})
 
 	meta_data['provenance'] = []
 	for outer_node in meta_soup.findAll('provenance'):
@@ -358,6 +367,7 @@ if __name__ == '__main__':
 			
 	print('Parsing Etext\n')
 	counter = 1
+	
 	for f in etext_files:
 	#if True:
 	#	f = 'lb99907002'
