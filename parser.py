@@ -87,7 +87,7 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 			if (meta_soup.find(key).parent.name.lower() == 'lbwork'):
 				meta_data[key] = meta_soup.find(key).string
 			else:
-				meta_data[key] = None
+				meta_data[key] = fallback
 		except:
 			meta_data[key] = fallback
 
@@ -97,7 +97,7 @@ def parseFile(file_name, meta_path, content_path, meta_ext, content_ext, output_
 			if (meta_soup.find(key).parent.name.lower() == 'lbwork'):
 				meta_data[key] = (meta_soup.find(key).string == 'True')
 			else:
-				meta_data[key] = None
+				meta_data[key] = fallback
 		except:
 			meta_data[key] = fallback
 
