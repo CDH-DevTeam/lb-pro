@@ -1,2 +1,3 @@
-# lb-pro
+# LB Pro
+
 Processing tool for LB data.
